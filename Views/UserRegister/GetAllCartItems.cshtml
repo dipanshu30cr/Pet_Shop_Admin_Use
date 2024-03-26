@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Cart>
+@{
+    ViewData["Title"] = "GetAllCartItems";
+}
+
+<h1 style="color:darkslategrey">Cart</h1>
+@{
+    int CartTotalValue = 0;
+    foreach (var item in Model)
+    {
+        CartTotalValue = CartTotalValue + (item.Pet.Pet_price * item.Quantity);
+    }
+
+
+}
+@if ((string)TempData["msg"] == "Payment sucessful.. Booking Placed")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["msg"]
+    </div>
+}
+@if ((string)TempData["msg"] == "Sucessfully Deleted the Item")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["msg"]
+    </div>
+}
+@if (CartTotalValue > 0)
+{
+    <div>
+        <h3 style="padding-left:800px"> <strong style="color:Blue">Cart total:</strong>  ₹ @CartTotalValue</h3>
+    </div>
+
+}
+
+<p>
+    <a type="button" class="btn btn-primary" asp-action="welcome">Back to Pet Menu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Pet Image
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string imgLink = item.Pet.Pet_Image_Url;
+
+            string dishImgUrl = imgLink.Replace("data:image/jpeg;base64,", "");
+
+            <tr>
+                <td>
+
+                    <img src=~/Images/@dishImgUrl alt="Card image cap" height="100" width="120">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pet.Pet_name)
+                </td>
+                <td>
+                    ₹ @(item.Pet.Pet_price * item.Quantity)
+                </td>
+                <td>
+                    <a asp-action="decreaseQuantity" asp-route-id="@item.Cart_Id" id="1" asp-controller="UserRegister" class="btn " role="button"><strong style="color:darkslategrey">-</strong></a>
+
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                    <a asp-action="AddQuantity" asp-route-id="@item.Cart_Id" asp-controller="UserRegister" class="btn " role="button"><strong style="color:darkslategrey">+</strong></a>
+                </td>
+                <td>
+
+                    <a type="button" class="btn btn-danger" asp-action="deleteFormCart" asp-controller="UserRegister" asp-route-id="@item.Cart_Id">Cancel</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (CartTotalValue > 0)
+{
+    <p>  <a asp-action="Bill" asp-controller="UserRegister" class="btn btn-primary" role="button">Book</a></p>
+}
+

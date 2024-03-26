@@ -1,0 +1,76 @@
+﻿@model Pet_Shop_Management.Models.Pet
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Dish</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Pet_name" class="control-label"> Pet name</label>
+                <input asp-for="Pet_name" class="form-control" />
+                <span asp-validation-for="Pet_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pet_price" class="control-label">Price</label>
+                <input asp-for="Pet_price" class="form-control" />
+                <span asp-validation-for="Pet_price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pet_description" class="control-label"> Description</label>
+                <input asp-for="Pet_description" class="form-control" />
+                <span asp-validation-for="Pet_description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actor" class="control-label"> Actor</label>
+                <input asp-for="Actor" class="form-control" />
+                <span asp-validation-for="Actor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Director " class="control-label"> Description</label>
+                <input asp-for="Director " class="form-control" />
+                <span asp-validation-for="Director " class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pet_Photo" class="control-label"></label>
+                <div class="mb-3">
+
+                    <input name="file" class="form-control" value="@(Model.Pet_Photo)" asp-for="Pet_Photo" id="formFile">
+                </div>
+                <span class="text-danger"></span>
+                @{
+                    string imgLin = Model.Pet_Image_Url;
+
+                   
+
+
+                }
+                <img src="~/Images/@Model.Pet_Image_Url" height="150px" width="200px" />
+            </div>
+
+
+
+
+            <div class="form-group">
+                <input style="margin-top:1.6rem" type="submit" value="Submit" class="btn btn-warning" />
+                <a style="margin-top:1.6rem" type="button" class="btn btn-outline-warning" asp-action="AdminDashboard">Back to DashBoard</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

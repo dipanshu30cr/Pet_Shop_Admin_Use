@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Booking>
+
+@{
+    ViewData["Title"] = "GetAllOrderss";
+}
+
+<h1> Order History</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="welcome">Back to DashBoard</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Invoice)
+            </th>
+            <th>Date</th>
+            <th>Time</th>
+
+            <th>Booking Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string Date = item.BookingDate.ToString();
+            string dayy = Date.Substring(0, 9);
+            string timee = Date.Substring(9);
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Invoice)</td>
+                <td>
+                    @dayy
+                </td>
+                <td>
+                    @timee
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="ViewOrderDetails" asp-route-id="@item.Invoice">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

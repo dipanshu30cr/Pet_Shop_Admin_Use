@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Cart>
+
+@{
+    ViewData["Title"] = "Bill";
+}
+
+<h1> Pay Bill</h1>
+
+@{
+
+    int totalBill = 0;
+    foreach (var item in Model)
+    {
+
+        totalBill = totalBill + (item.Pet.Pet_price * item.Quantity);
+
+
+
+
+    }
+    string Date = (DateTime.Now).ToString();
+    string dayy = Date.Substring(0, 9);
+    string timee = Date.Substring(10);
+}
+
+<div>
+    <h3> Invoice : @TempData["Invoice"]</h3>
+    <div style="display:flex">
+        <P> Date :@dayy </P> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <P>  Time :@timee</P>
+    </div>
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Pet.Pet_name
+                </td>
+                <td>
+                    @(item.Pet.Pet_price * item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <h3>Total Amount:₹@totalBill </h3>
+</div>
+<div>
+    <a type="button" asp-controller="UserRegister" class="btn btn-warning" asp-action="Checkout">  Proceed to Pay ₹@totalBill</a>
+    <a type="button" asp-controller="UserRegister" class="btn btn-warning" asp-action="GetAllCartItems">  Cancel</a>
+</div>

@@ -1,0 +1,29 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    background:url(../Images/Pet_Logo.jpg) ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    background-color: #c8b8d7;
+}
+/*#BackgroundImage {
+    background: url(../Images/Pet_Logo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;*/
+  
+

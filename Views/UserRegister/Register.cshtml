@@ -1,0 +1,138 @@
+﻿@model Pet_Shop_Management.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1 style="color:darkslategrey">Register</h1>
+@if ((string)TempData["Pass"] == "Pass")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["AddMsg"]
+    </div>
+
+}
+@if ((string)TempData["FailName"] == "FailN")
+{
+    <div class="alert alert-danger">
+        <strong>Error !!</strong> @TempData["AddMsg"]
+    </div>
+}
+@if ((string)TempData["FailEmail"] == "FailE")
+{
+    <div class="alert alert-danger">
+        <strong>Error !!</strong> @TempData["AddMsg"]
+    </div>
+}
+@if ((string)TempData["FailBoth"] == "FailB")
+{
+    <div class="alert alert-danger">
+        <strong>Error !!</strong> @TempData["AddMsg"]
+    </div>
+}
+@*<style>
+
+    body{
+        background-color:lightgrey;
+    }
+    .row{
+        background-color:white;
+    }
+</style>*@
+
+
+
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+    <style>
+        .cascading-right {
+            margin-right: -50px;
+        }
+
+    </style>
+
+    <!-- Jumbotron -->
+    <div class="container py-4" style="height=500">
+        <div class="row g-0 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card cascading-right" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+                    <div class="card-body p-5 shadow-5 ">
+                        <div class="card-body p-5 shadow-5 text-center "> <h2 class="fw-bold mb-5">Sign up now</h2></div>
+                        <form asp-action="Register" asp-controller="UserRegister">
+                            <!-- 2 column grid layout with text inputs for the first and last names -->
+                            <div class="row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-outline">
+                                        <label asp-for="Name" class="control-label">Name<sup style="color:red">*</sup></label>
+                                        <input asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label asp-for="Email" class="control-label">Email<sup style="color:red">*</sup></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <label asp-for="Password" class="control-label">Password<sup style="color:red">*</sup></label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label asp-for="Address" class="control-label">Address<sup style="color:red">*</sup></label>
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+
+                            <!-- Submit button -->
+                            <input style="margin-top:1.6rem;margin-bottom:1.6rem" type="submit" value="Submit" class="btn btn-warning" />
+                            <a style="margin-top:1.6rem;margin-bottom:1.6rem" type="button" class="btn btn-outline-warning" asp-action="UserLogin">Login</a>
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>or sign up with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+                     alt="" />
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

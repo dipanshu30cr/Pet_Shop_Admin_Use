@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Pet>
+
+@{
+    ViewData["Title"] = "welcome";
+}
+
+<h3>welcome &nbsp <span style="color:b">@ViewData["UserDashBoard"]</span></h3>
+@if ((string)TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong> @TempData["msg"]
+    </div>
+}
+
+<div class="container">
+    <div class="row row-cols-3">
+        @foreach (var item in Model)
+        {
+            string imgLink = item.Pet_Image_Url;
+            string dishImgUrl = imgLink.Replace("data:image/jpeg;base64,", "");
+
+            <div class="card" style="width: 18rem; margin:30px background-color: skyblue;">
+                <img src="~/Images/@item.Pet_Image_Url" height="200px" width="200px" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Pet_name</h5>
+                    <h5 class="card-title">Price: ₹ @item.Pet_price</h5>
+                    <p class="card-text">Desc-@item.Pet_description</p>
+                    @*<h5 class="card-title">Actor:@item.Actor</h5>
+                    <h5 class="card-title">Director:@item.Director</h5>*@
+                    <a asp-action="AddToCart" asp-controller="UserRegister" asp-route-id="@item.Pet_Id" class="btn btn-info" role="button">Book</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

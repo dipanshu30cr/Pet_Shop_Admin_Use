@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Pet>
+
+@{
+    ViewData["Title"] = "AdminDashboard";
+}
+
+<h1>Admin Dashboard</h1>
+@if ((string)TempData["Deleted"] == "Pet is Deleted sucessfully")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["Deleted"]
+    </div>
+
+}
+
+
+<p>
+    <a type="button" class="btn btn-outline-primary"asp-controller="Admin" asp-action="AddNewPet">Add New Pet</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Description
+            </th>
+           
+            <th>
+                Pet Images
+            </th>
+
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pet_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pet_price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pet_description)
+                </td>
+                
+                <td>
+
+                    <img src="~/Images/@item.Pet_Image_Url" height="70px" width="100px" />
+
+
+                </td>
+
+                <td>
+                    <a style="margin-left:6px" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Pet_Id">Edit</a>
+                    <a style="margin-left:10px" class="btn btn-success" asp-action="Details" asp-route-id="@item.Pet_Id">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Pet_Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

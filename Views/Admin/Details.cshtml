@@ -1,0 +1,57 @@
+﻿@model Pet_Shop_Management.Models.Pet
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Pet</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Name
+            @* @Html.DisplayNameFor(model => model.Movie_name)*@
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet_name)
+        </dd>
+        <dt class="col-sm-2">
+            Price
+            @* @Html.DisplayNameFor(model => model.Movie_price)*@
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet_price)
+        </dd>
+        <dt class="col-sm-2">
+            Description
+            @* @Html.DisplayNameFor(model => model.Movie_description)*@
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet_description)
+        </dd>
+        
+        <dt class="col-sm-2">
+            Pet Photo
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                string imgLin = Model.Pet_Image_Url;
+
+               
+
+
+            }
+            <img src="~/Images/@Model.Pet_Image_Url" height="70px" width="100px" />
+
+        </dd>
+
+
+
+    </dl>
+</div>
+<div>
+    @* <a asp-action="Edit" asp-route-id="@Model?.Dish_Id">Edit</a> |*@
+    <a type="button" class="btn btn-warning" asp-action="AdminDashboard">Back to DashBoard</a>
+</div>

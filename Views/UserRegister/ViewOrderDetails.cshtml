@@ -1,0 +1,127 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Booking>
+
+@{
+    ViewData["Title"] = "Pet Details";
+}
+
+<div id="Bill">
+    <h1 style="color:red;padding-bottom:5rem">Pet Details</h1>
+
+    @{
+        int CartTotalValue = 0;
+        string invoice = "";
+        foreach (var item in Model)
+        {
+            invoice = item.Invoice;
+            CartTotalValue = CartTotalValue + (item.Pet.Pet_price * item.Quantity);
+        }
+
+
+
+
+    }
+
+
+
+
+
+    <h2>Invoice: @invoice</h2>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    &nbsp
+                    Pet Name
+                    &nbsp
+                </th>
+                <th>
+                    &nbsp
+                    Price
+                    &nbsp
+                </th>
+                <th>
+                    &nbsp
+                    Pet Book  Quantity
+                    &nbsp
+                </th>
+                <th>
+                    &nbsp
+                    Date
+                    &nbsp
+                </th>
+                <th>
+                    &nbsp
+                    Time
+                    &nbsp
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                string Date = item.BookingDate.ToString();
+                string dayy = Date.Substring(0, 9);
+                string timee = Date.Substring(9);
+                <tr>
+
+                    <td>
+                        &nbsp
+                        @Html.DisplayFor(modelItem => item.Pet.Pet_name)
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                        @Html.DisplayFor(modelItem => item.price)
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                        @dayy
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                        @timee
+                        &nbsp
+                    </td>
+
+                    <hr></hr>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (CartTotalValue > 0)
+    {
+        <div>
+            <h3 style="padding-left:10px"> <strong style="color:red"> Total Amount :</strong>  ₹ @CartTotalValue</h3>
+        </div>
+
+    }
+</div>
+<form method="post" asp-controller="UserRegister" asp-action="ExportExcel">
+    <input type="hidden" name="ExportBill" id="ExportData" />
+    <input type="submit" id="BillBtnSub" value="Print Bill" class="btn btn-warning" />
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+      $("#BillBtnSub").click(function () {
+        $("input[name='ExportBill']").val($("#Bill").html());
+      });
+    });
+</script>

@@ -1,0 +1,56 @@
+﻿@model Pet_Shop_Management.Models.Login
+@{
+    ViewData["Title"] = "UserLogin";
+}
+
+@if (TempData["AddMsgLogin"] != null && (string)TempData["FailLogin"] == "Fail")
+{
+    <div class="alert alert-danger">
+        <strong>Error !!</strong> @TempData["AddMsgLogin"]
+    </div>
+}
+<link href="~/css/site.css" rel="stylesheet" />
+
+
+<section class="form">
+    <div style="justify-content: center;" class="container no-gutters ">
+        <div class="row no-gutters ">
+           @* <div style="padding-left: 0; padding-right: 0; " class="col-lg-5 no-gutters">
+                <img class="img-fluid" src="~/Images/Pet_Logo.jpg" style="height: 550px;width: 100%;">
+            </div>*@
+
+        <div class="col-lg-5 px-5 pt-5 ">
+            <form asp-action="UserLogin">
+                <h1 style="color: Red; font-family: Tahoma" class="font-weight-bold pt-2">Pet</h1>
+                <h4 class="pb-4 pt-1" style="font-weight: 400">Welcome To Pet Shop</h4>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-lg-10">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control my-3" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group form-group col-lg-10">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control my-3" />
+
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input style="margin-top: 1.6rem" type="submit" value="Submit" class="btn btn-info" />
+                    &nbsp;&nbsp;&nbsp;
+                    <a type="button" class="btn btn-info" style="margin-top: 1.6rem" asp-action="Register">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+<div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

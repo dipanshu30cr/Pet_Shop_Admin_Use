@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Pet_Shop_Management.Models.Booking>
+
+@{
+    ViewData["Title"] = "GetAllBookings";
+}
+
+<h1 style="color:darkslategrey">Booking History</h1>
+<div>
+    <p style="padding-left:850px">
+        <a type="button" class="btn btn-warning" asp-action="welcome">  Back to DashBoard</a>
+    </p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Pet Image
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Invoice)*@
+                Pet Name
+            </th>
+            <th>
+                Total Price
+            </th>
+            <th>
+                Quantity
+            </th>
+
+            <th>
+                invoice
+            </th>
+
+            <th>
+                Pet Date
+            </th>
+            <th>
+                Pet Time
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string imgLin = item.Pet.Pet_Image_Url;
+
+            //Console.WriteLine(imgLin.Length);
+            //Console.WriteLine(imgLin);
+            string dishImgUrl = imgLin.Substring(66);
+
+            string Date = item.BookingDate.ToString();
+            string dayy = Date.Substring(0, 9);
+            string timee = Date.Substring(10);
+
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Invoice)*@
+                    <img src="@dishImgUrl" alt="Card image cap" height="100" width="120">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pet.Pet_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem =>item.Quantity )
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem =>item.Invoice )
+                </td>
+                <td>
+                    @dayy
+                </td>
+                <td>
+                    @timee
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

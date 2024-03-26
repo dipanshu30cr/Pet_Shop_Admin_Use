@@ -1,0 +1,73 @@
+﻿@model Pet_Shop_Management.Models.Pet
+
+@{
+    ViewData["Title"] = "AddNewPet";
+}
+
+<h1>Add New Pet</h1>
+
+@if ((string)TempData["Added"] == "Pet is added sucessfully")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["Added"]
+    </div>
+
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="AddNewPet">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Pet_name" class="control-label"> Pet name</label>
+                <input asp-for="Pet_name" class="form-control" />
+                <span asp-validation-for="Pet_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pet_price" class="control-label">  Price</label>
+                <input asp-for="Pet_price" class="form-control" />
+                <span asp-validation-for="Pet_price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pet_description" class="control-label">Description</label>
+                <input asp-for="Pet_description" class="form-control" />
+                <span asp-validation-for="Pet_description" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Actor" class="control-label">Actor</label>
+                <input asp-for="Actor" class="form-control" />
+                <span asp-validation-for="Actor" class="text-danger"></span>
+            </div>*@
+           @* <div class="form-group">
+                <label asp-for="Director " class="control-label">Director </label>
+                <input asp-for="Director " class="form-control" />
+                <span asp-validation-for="Director " class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Pet_Photo" class="control-label"></label>
+                <div class="mb-3">
+
+                    <input required name="file" class="form-control" asp-for="Pet_Photo" id="formFile">
+                </div>
+                <span asp-validation-for="Pet_Photo" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group" style="text-align:center">
+                <input style="margin-top:1.6rem" type="submit" value="Submit" class="btn btn-success" />
+                <a style="margin-top:1.6rem" type="button" class="btn btn-outline-warning" asp-action="AdminDashboard">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Pet_Shop_Management</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MiniPrjtFoodApp.styles.css" asp-append-version="true" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    @*<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    <link href="~/css/site.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header>
+       
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+        
+            <div class="container-fluid">
+                <div>
+                    @Html.Raw($"<marquee style=\"color: red; font-size: 20px;\">{"Welcome To Pet Shop"}</marquee>")
+                </div>
+                @* <a style="color:red;font-family:Tahoma;font-style:bold" class="navbar-brand marquee" asp-area="" asp-controller="Home" asp-action="Index">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome To Cinema</a>*@
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                    </ul>
+                    <ul class="navbar-nav navbar-right">
+                        @if (ViewData["AdminDashboard"] != null)
+                        {
+
+                            <li style="background-color:dodgerblue;margin:0 1rem" class="nav-item">
+                                <a class="btn btn-danger" asp-area="" asp-controller="Admin" asp-action="Logout">Logout</a>
+                            </li>
+
+
+                        }
+                        @if (ViewData["UserDashBoard"] != null)
+                        {
+
+                            @* <li  style="background-color:dodgerblue;margin:0 1rem" class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="UserRegister" asp-action="UserLogin">Login</a>
+                        </li>*@
+                            <li style="margin:0 1rem" class="nav-item">
+                                <a type="button" class="btn btn-outline-primary" class="btn btn-info nav-link text-dark" asp-area="" asp-controller="UserRegister" asp-action="welcome">Home</a>
+                            </li>
+                            <li style="margin:0 1rem" class="nav-item">
+                                <a type="button" class="btn btn-primary nav-link text-dark" asp-area="" asp-controller="UserRegister" asp-action="GetAllCartItems">
+                                    <img src="~/Images/sau.png" alt="Logo" style="width: 50px; height: 30px; margin-right: 5px;" />
+
+                                </a>
+                            </li>
+
+                            <li style="margin:0 1rem" class="nav-item">
+                                <a type="button" class="btn btn-success" class="nav-link text-dark" asp-area="" asp-controller="UserRegister" asp-action="GetAllBookingss">view Bookings</a>
+
+                            </li>
+                            <li style="margin:0 1rem " class="nav-item">
+                                <a type="button" class="btn btn-outline-danger" class="nav-link text-dark" asp-area="" asp-controller="UserRegister" asp-action="Logout">
+                                    Logout
+                                    @*<img src="~/Images/logout.png" alt="Logo" style="width: 50px; height: 30px; margin-right: 5px;" />*@
+                                </a>
+                            </li>
+
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            
+        </nav>
+    </header>
+    <div id="BackgroundImage">
+        <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    </div>
+   
+
+  @*  <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Pet_Shop_Management - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+</body>
+</html>
